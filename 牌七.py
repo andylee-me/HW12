@@ -664,23 +664,24 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
 print("遊戲結束")
 print("你蓋了", len(bad_player), "張牌", "\n", "共", player_point[-1], "點")
 to = [bad_player, bad_p2, bad_p3, bad_p4]
-for i in range(1,4):
-    for a in range(len(to[i])):
-        if str(to[i][a][2]) == "1":
-            to[i] = to[i][0] + to[i][1] + "A"
-        if len(to[i][a]) == 4:
-            if str(to[i][a][2]) + str(to[i][a][3]) == "11":
-                to[i] = to[i][0] + to[i][1] + "J"
-            if str(to[i][a][2]) + str(to[i][a][3]) == "12":
-                to[i] = to[i][0] + to[i][1] + "Q"
-            if str(to[i][a][2]) + str(to[i][a][2]) == "13":
-                to[i] = to[i][0] + to[i][1] + "K"
+
 total = [player_point[-1], p2_point[-1], p3_point[-1], p4_point[-1]]
 tt = [player_point[-1], p2_point[-1], p3_point[-1], p4_point[-1]]
 winner = ["player1", "player2", "player3", "player4"]
 total.sort()
 c = 0
 b = []
+for i in range(1,4):
+    for a in range(len(to[i])):
+        if str(to[i][a][2]) == "1" and len(to[i][a])!=4:
+            to[i][a] = to[i][0] + to[i][1] + "A"
+        if len(to[i][a]) == 4:
+            if str(to[i][a][2]) + str(to[i][a][3]) == "11":
+                to[i][a] = to[i][0] + to[i][1] + "J"
+            if str(to[i][a][2]) + str(to[i][a][3]) == "12":
+                to[i][a] = to[i][0] + to[i][1] + "Q"
+            if str(to[i][a][2]) + str(to[i][a][2]) == "13":
+                to[i][a] = to[i][0] + to[i][1] + "K"
 for i in range(0, 4):
     if tt[i] not in b:
         b.append(tt[i])
