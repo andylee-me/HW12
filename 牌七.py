@@ -511,7 +511,6 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
                     a[1] = "13"
                 while int(a[1]) != int(愛[-1]) + 1 or int(
                         a[1]) != int(愛[0]) - 1:
-                    print("eeeee")
                     if int(a[1]) == int(愛[-1]) + 1:
                         count += 1
                         break
@@ -543,7 +542,6 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
                     a[1] = "13"
                 while int(a[1]) != int(黑[-1]) + 1 or int(
                         a[1]) != int(黑[0]) - 1:
-                    print("eeeee")
                     if int(a[1]) == int(黑[-1]) + 1:
                         count += 1
                         break
@@ -664,53 +662,55 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
 print("遊戲結束")
 print("你蓋了", len(bad_player), "張牌", "\n", "共", player_point[-1], "點")
 to = [bad_player, bad_p2, bad_p3, bad_p4]
-
 total = [player_point[-1], p2_point[-1], p3_point[-1], p4_point[-1]]
 tt = [player_point[-1], p2_point[-1], p3_point[-1], p4_point[-1]]
 winner = ["player1", "player2", "player3", "player4"]
 total.sort()
+print(to)
+for i in range(1,4):
+    for a in range(0,len(to[i])):
+        print(to[i][a])
+        c = list(to[i][a])
+        print(c)
+        print(c[0]+c[1]+"J")
+        if len(c) == 3:
+            if c[2] == "1":
+                to[i][a] = c[0]+c[1]+"A"
+        if len(c) == 4:
+            if c[2]+c[3] == "11" and len(c) == 4:
+                to[i][a] = c[0]+c[1]+"J"
+            elif c[2]+c[3] == "12" and len(c) == 4:
+                to[i][a] = c[0]+c[1]+"Q"
+            elif c[2]+c[3] == "13" and len(c) == 4:
+                to[i][a] = c[0]+c[1]+"K"
+print(to)
 c = 0
 b = []
-for i in range(1,4):
-    for a in range(len(to[i])):
-        if str(to[i][a][2]) == "1" and len(to[i][a])!=4:
-            to[i][a] = to[i][0] + to[i][1] + "A"
-        if len(to[i][a]) == 4:
-            if str(to[i][a][2]) + str(to[i][a][3]) == "11":
-                to[i][a] = to[i][0] + to[i][1] + "J"
-            if str(to[i][a][2]) + str(to[i][a][3]) == "12":
-                to[i][a] = to[i][0] + to[i][1] + "Q"
-            if str(to[i][a][2]) + str(to[i][a][2]) == "13":
-                to[i][a] = to[i][0] + to[i][1] + "K"
-for i in range(0, 4):
-    if tt[i] not in b:
-        b.append(tt[i])
+for i in tt:
+    if i not in b:
+        b.append(i)
 if b == tt:
     for o in range(0, 4):
         for i in range(0, 4):
             if total[0] == tt[i] and c == 0:
-                print("第一名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:",
-                      to[i])
+                print("第一名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:",to[i])
                 c += 1
             elif total[1] == tt[i] and c == 1:
-                print("第二名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:",
-                      to[i])
+                print("第二名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:",to[i])
                 c += 1
             elif total[2] == tt[i] and c == 2:
-                print("第三名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:",
-                      to[i])
+                print("第三名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:",to[i])
                 c += 1
             elif total[3] == tt[i] and c == 3:
                 c += 1
-                print("第四名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:",
-                      to[i])
-else:
-    for i in range(0, 4):
-        if total[0] == tt[i]:
-            print("第一名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:", to[i])
-        elif total[1] == tt[i]:
-            print("第二名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:", to[i])
-        elif total[2] == tt[i]:
-            print("第三名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:", to[i])
-        elif total[3] == tt[i]:
-            print("第四名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:", to[i])
+                print("第四名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:",to[i])
+if b != tt:
+         for i in range(0, 4):
+            if total[0] == tt[i]:
+                print("第一名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:", to[i])
+            elif total[1] == tt[i]:
+                print("第二名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:", to[i])
+            elif total[2] == tt[i]:
+                print("第三名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:", to[i])
+            elif total[3] == tt[i]:
+                print("第四名", "\t", winner[i], "共蓋了:", (tt[i]), "點", "蓋的牌:", to[i])
