@@ -184,14 +184,9 @@ def com(card):
 
 
 def rule(card):
-    if card == "0":
+    if card == 0:
         kill = input("請輸入你要蓋哪張牌:")
-        error = re.findall(r"[A-WY-Za-wy-z\u4e00-\u9fa5]+", kill)
-        while len(error) > 0 or kill == "" or int(kill) > len(player):
-            kill = input('請輸入數字：')
-            error = re.findall(r"[A-WY-Za-wy-z\u4e00-\u9fa5]+", kill)
-        while float(kill) > len(player):
-            kill = input("你沒有這張牌,請重新選擇:")
+
         ans_1.append(kill)
         if len(player[int(kill) - 1]) == 4:
             player_point.append(int(player_point[-1]) + 10)
@@ -409,20 +404,16 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
     if len(player) != 0:
         ans = input("請輸入要出第幾張牌(蓋牌請輸入0):")
         while True:
-            print("yes")
             try:
-                print("number")
                 int(ans)
-                print('""')
                 if ans == "":
                     raise
-              
+                if int(ans) > len(player):
+                    raise
                 ans = int(ans)
-                print("yes")
                 break
             except:
                 ans = input("請重新輸入數字:")
-                print("yes")
 
         if True:
             num(梅)
@@ -441,7 +432,7 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
             黑 = list(map(int, 黑))
             黑.sort()
             黑 = list(map(str, 黑))
-            if int(ans) - 1 < len(梅花) and len(梅花) != 0:
+            if int(ans) - 1 < len(梅花) and len(梅花) != 0 and ans != 0:
                 change = player[int(ans) - 1]
                 a = change.split("梅花")
                 if a[1] == "A":
@@ -468,16 +459,20 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
                     if int(a[1]) != int(梅[-1]) + 1 or int(
                             a[1]) != int(梅[0]) - 1:
                         ans = input("你現在還不能出這張牌,請輸入要出第幾張牌(蓋牌請輸入0):")
-                        error = re.findall(r"[A-WY-Za-wy-z\u4e00-\u9fa5]+",
-                                           ans)
-                        while len(error) > 0 or ans == "" or int(ans) > len(
-                                player):
-                            ans = input('請輸入數字：')
-                            error = re.findall(r"[A-WY-Za-wy-z\u4e00-\u9fa5]+",
-                                               ans)
+                        while True:
+                            try:
+                                int(ans)
+                                if ans == "":
+                                    raise
+                              
+                                ans = int(ans)
+                                print("")
+                                break
+                            except:
+                                ans = input("請重新輸入數字:")
                         change = player[int(ans) - 1]
                         break
-            elif int(ans) - 1 < len(梅花) + len(菱形) and len(菱形) != 0:
+            elif int(ans) - 1 < len(梅花) + len(菱形) and len(菱形) != 0 and ans!=0:
                 change = player[int(ans) - 1]
                 a = change.split("菱形")
                 if a[1] == "A":
@@ -499,16 +494,19 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
                     if int(a[1]) != int(菱[-1]) + 1 or int(
                             a[1]) != int(菱[0]) - 1:
                         ans = input("你現在還不能出這張牌,請輸入要出第幾張牌(蓋牌請輸入0):")
-                        error = re.findall(r"[A-WY-Za-wy-z\u4e00-\u9fa5]+",
-                                           ans)
-                        while len(error) > 0 or ans == "" or int(ans) > len(
-                                player):
-                            ans = input('請輸入數字：')
-                            error = re.findall(r"[A-WY-Za-wy-z\u4e00-\u9fa5]+",
-                                               ans)
+                        while True:
+                            try:
+                                int(ans)
+                                if ans == "":
+                                    raise
+                              
+                                ans = int(ans)
+                                break
+                            except:
+                                ans = input("請重新輸入數字:")
                         break
 
-            elif int(ans) - 1 < len(梅花) + len(菱形) + len(愛心) and len(愛心) != 0:
+            elif int(ans) - 1 < len(梅花) + len(菱形) + len(愛心) and len(愛心) != 0 and ans != 0:
                 change = player[int(ans) - 1]
                 a = change.split("愛心")
                 if a[1] == "A":
@@ -530,16 +528,21 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
                     if int(a[1]) != int(愛[-1]) + 1 or int(
                             a[1]) != int(愛[0]) - 1:
                         ans = input("你現在還不能出這張牌,請輸入要出第幾張牌(蓋牌請輸入0):")
-                        error = re.findall(r"[A-WY-Za-wy-z\u4e00-\u9fa5]+",
-                                           ans)
-                        while len(error) > 0 or ans == "" or int(ans) > len(
-                                player):
-                            ans = input('請輸入數字：')
-                            error = re.findall(r"[A-WY-Za-wy-z\u4e00-\u9fa5]+",
-                                               ans)
+                        while True:
+                            try:
+                                int(ans)
+                                if ans == "":
+                                    raise
+                              
+                                ans = int(ans)
+                                print("")
+                                break
+                            except:
+                                ans = input("請重新輸入數字:")
+
                         break
             elif int(ans) - 1 < len(梅花) + len(菱形) + len(愛心) + len(黑桃) and len(
-                    黑桃) != 0:
+                    黑桃) != 0 and ans!=0:
                 change = player[int(ans) - 1]
                 a = change.split("黑桃")
                 if a[1] == "A":
@@ -560,14 +563,17 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
                         break
                     if int(a[1]) != int(黑[-1]) + 1 or int(
                             a[1]) != int(黑[0]) - 1:
-                        ans = input("你現在還不能出這張牌,請輸入要出第幾張牌(蓋牌請輸入0):")
-                        error = re.findall(r"[A-WY-Za-wy-z\u4e00-\u9fa5]+",
-                                           ans)
-                        while len(error) > 0 or ans == "" or int(ans) > len(
-                                player):
-                            ans = input('請輸入數字：')
-                            error = re.findall(r"[A-WY-Za-wy-z\u4e00-\u9fa5]+",
-                                               ans)
+                        while True:
+                            try:
+                                int(ans)
+                                if ans == "":
+                                    raise
+                              
+                                ans = int(ans)
+                                break
+                            except:
+                                ans = input("請重新輸入數字:")
+
                         break
         rule(ans)
         if player[int(ans_1[-1]) - 1][0] == "梅":
