@@ -1,3 +1,22 @@
+def num1(card):
+    if card[1] == "A":
+        card[1] = "1"
+    if card[1] == "J":
+        card[1] = "11"
+    if card[1] == "Q":
+        card[1] = "12"
+    if card[1] == "K":
+        card[1] = "13"
+def num2(card):
+    if card == "A":
+        card = "1"
+    if card == "J":
+        card = "11"
+    if card == "Q":
+        card = "12"
+    if card == "K":
+        card = "13"
+        
 def com(card):
     global 梅
     global 菱
@@ -186,7 +205,20 @@ def com(card):
 def rule(card):
     if card == 0:
         kill = input("請輸入你要蓋哪張牌:")
-
+        while True:
+            try:
+                if kill == "0":
+                    raise
+                int(kill)
+                if ans == "":
+                    raise
+                if int(kill) > len(player):
+                    raise
+                kill = int(kill)
+                print(kill)
+                break
+            except:
+                kill = input("請重新輸入數字:")
         ans_1.append(kill)
         if len(player[int(kill) - 1]) == 4:
             player_point.append(int(player_point[-1]) + 10)
@@ -252,12 +284,10 @@ def letter(card):
             card[o] = "K"
         if card[o] == "1":
             card[o] = "A"
-
-
 import re
 from random import shuffle
 
-suit = ["黑桃", "愛心", "菱形", "梅花"]
+suit = ["黑桃", "愛心" , "菱形", "梅花"]
 order = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 黑桃 = []
 梅花 = []
@@ -273,6 +303,7 @@ com_愛 = []
 com_黑 = []
 total = [com_梅, com_菱, com_愛, com_黑]
 number = [梅, 菱, 愛, 黑]
+word2 = ["梅","菱","愛","黑"]
 word = ["梅花", "菱形", "愛心", "黑桃"]
 goal = []
 count = 0
@@ -405,176 +436,110 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
         ans = input("請輸入要出第幾張牌(蓋牌請輸入0):")
         while True:
             try:
-                int(ans)
-                if ans == "":
-                    raise
-                if int(ans) > len(player):
-                    raise
-                ans = int(ans)
+                while True:
+                    try:
+                        int(ans)
+                        if ans == "":
+                            raise
+                        if int(ans) > len(player):
+                            raise
+                        ans = int(ans)
+                        break
+                    except:
+                        ans = input("請重新輸入數字:")
+                num(梅)
+                梅 = list(map(int, 梅))
+                梅.sort()
+                梅 = list(map(str, 梅))
+                num(菱)
+                菱 = list(map(int, 菱))
+                菱.sort()
+                菱 = list(map(str, 菱))
+                num(愛)
+                愛 = list(map(int, 愛))
+                愛.sort()
+                愛 = list(map(str, 愛))
+                num(黑)
+                黑 = list(map(int, 黑))
+                黑.sort()
+                黑 = list(map(str, 黑))
+                if ans == 0:
+                    number = [梅,菱,愛,黑]
+                    for i in player:
+                        for o in range(0,4):
+                            if i[0] == word2[o]:
+                                change = i
+                                a = change.split(word[o])
+                                num1(a)
+                                if int(a[1]) == int(number[o][-1]) + 1 or int(a[1]) == int(number[o][0]) - 1:
+                                    raise
+                if ans == 0:
+                    break
+                num(梅)
+                if int(ans) - 1 < len(梅花) and len(梅花) != 0 and ans != 0:
+                    change = player[int(ans) - 1]
+                    a = change.split("梅花")
+                    num1(a)
+                    while int(a[1]) != int(梅[-1]) + 1 or int(a[1]) != int(梅[0]) - 1:
+                        if int(a[1]) == int(梅[-1]) + 1:
+                            count += 1
+                            break
+                        if int(a[1]) == int(梅[0]) - 1:
+                            count += 1
+                            break
+                        if int(a[1]) != int(梅[-1]) + 1 or int(a[1]) != int(梅[0]) - 1:
+                            raise
+                        
+                elif int(ans) - 1 < len(梅花) + len(菱形) and len(菱形) != 0 and ans != 0:
+                    change = player[int(ans) - 1]
+                    a = change.split("菱形")
+                    num1(a)
+                    while int(a[1]) != int(菱[-1]) + 1 or int(
+                            a[1]) != int(菱[0]) - 1:
+                        if int(a[1]) == int(菱[-1]) + 1:
+                            count += 1
+                            break
+                        if int(a[1]) == int(菱[0]) - 1:
+                            count += 1
+                            break
+                        if int(a[1]) != int(菱[-1]) + 1 or int(
+                                a[1]) != int(菱[0]) - 1:
+                            raise
+
+                elif int(ans) - 1 < len(梅花) + len(菱形) + len(愛心) and len(愛心) != 0 and ans != 0:
+                    change = player[int(ans) - 1]
+                    a = change.split("愛心")
+                    num1(a)
+                    while int(a[1]) != int(愛[-1]) + 1 or int(
+                            a[1]) != int(愛[0]) - 1:
+                        if int(a[1]) == int(愛[-1]) + 1:
+                            count += 1
+                            break
+                        if int(a[1]) == int(愛[0]) - 1:
+                            count += 1
+                            break
+                        if int(a[1]) != int(愛[-1]) + 1 or int(
+                                a[1]) != int(愛[0]) - 1:
+                            raise
+                elif int(ans) - 1 < len(梅花) + len(菱形) + len(愛心) + len(黑桃) and len(
+                        黑桃) != 0 and ans != 0:
+                    change = player[int(ans) - 1]
+                    a = change.split("黑桃")
+                    num1(a)
+                    while int(a[1]) != int(黑[-1]) + 1 or int(
+                            a[1]) != int(黑[0]) - 1:
+                        if int(a[1]) == int(黑[-1]) + 1:
+                            count += 1
+                            break
+                        if int(a[1]) == int(黑[0]) - 1:
+                            count += 1
+                            break
+                        if int(a[1]) != int(黑[-1]) + 1 or int(
+                                a[1]) != int(黑[0]) - 1:
+                            raise
                 break
             except:
-                ans = input("請重新輸入數字:")
-
-        if True:
-            num(梅)
-            梅 = list(map(int, 梅))
-            梅.sort()
-            梅 = list(map(str, 梅))
-            num(菱)
-            菱 = list(map(int, 菱))
-            菱.sort()
-            菱 = list(map(str, 菱))
-            num(愛)
-            愛 = list(map(int, 愛))
-            愛.sort()
-            愛 = list(map(str, 愛))
-            num(黑)
-            黑 = list(map(int, 黑))
-            黑.sort()
-            黑 = list(map(str, 黑))
-            if int(ans) - 1 < len(梅花) and len(梅花) != 0 and ans != 0:
-                change = player[int(ans) - 1]
-                a = change.split("梅花")
-                if a[1] == "A":
-                    a[1] = "1"
-                if a[1] == "J":
-                    a[1] = "11"
-                if a[1] == "Q":
-                    a[1] = "12"
-                if a[1] == "K":
-                    a[1] = "13"
-
-                num(梅)
-                num(菱)
-                num(愛)
-                num(黑)
-                while int(a[1]) != int(梅[-1]) + 1 or int(
-                        a[1]) != int(梅[0]) - 1:
-                    if int(a[1]) == int(梅[-1]) + 1:
-                        count += 1
-                        break
-                    if int(a[1]) == int(梅[0]) - 1:
-                        count += 1
-                        break
-                    if int(a[1]) != int(梅[-1]) + 1 or int(
-                            a[1]) != int(梅[0]) - 1:
-                        ans = input("你現在還不能出這張牌,請輸入要出第幾張牌(蓋牌請輸入0):")
-                        while True:
-                            try:
-                                int(ans)
-                                if ans == "":
-                                    raise
-                              
-                                ans = int(ans)
-                                print("")
-                                break
-                            except:
-                                ans = input("請重新輸入數字:")
-                        change = player[int(ans) - 1]
-                        break
-            elif int(ans) - 1 < len(梅花) + len(菱形) and len(菱形) != 0 and ans!=0:
-                change = player[int(ans) - 1]
-                a = change.split("菱形")
-                if a[1] == "A":
-                    a[1] = "1"
-                if a[1] == "J":
-                    a[1] = "11"
-                if a[1] == "Q":
-                    a[1] = "12"
-                if a[1] == "K":
-                    a[1] = "13"
-                while int(a[1]) != int(菱[-1]) + 1 or int(
-                        a[1]) != int(菱[0]) - 1:
-                    if int(a[1]) == int(菱[-1]) + 1:
-                        count += 1
-                        break
-                    if int(a[1]) == int(菱[0]) - 1:
-                        count += 1
-                        break
-                    if int(a[1]) != int(菱[-1]) + 1 or int(
-                            a[1]) != int(菱[0]) - 1:
-                        ans = input("你現在還不能出這張牌,請輸入要出第幾張牌(蓋牌請輸入0):")
-                        while True:
-                            try:
-                                int(ans)
-                                if ans == "":
-                                    raise
-                              
-                                ans = int(ans)
-                                break
-                            except:
-                                ans = input("請重新輸入數字:")
-                        break
-
-            elif int(ans) - 1 < len(梅花) + len(菱形) + len(愛心) and len(愛心) != 0 and ans != 0:
-                change = player[int(ans) - 1]
-                a = change.split("愛心")
-                if a[1] == "A":
-                    a[1] = "1"
-                if a[1] == "J":
-                    a[1] = "11"
-                if a[1] == "Q":
-                    a[1] = "12"
-                if a[1] == "K":
-                    a[1] = "13"
-                while int(a[1]) != int(愛[-1]) + 1 or int(
-                        a[1]) != int(愛[0]) - 1:
-                    if int(a[1]) == int(愛[-1]) + 1:
-                        count += 1
-                        break
-                    if int(a[1]) == int(愛[0]) - 1:
-                        count += 1
-                        break
-                    if int(a[1]) != int(愛[-1]) + 1 or int(
-                            a[1]) != int(愛[0]) - 1:
-                        ans = input("你現在還不能出這張牌,請輸入要出第幾張牌(蓋牌請輸入0):")
-                        while True:
-                            try:
-                                int(ans)
-                                if ans == "":
-                                    raise
-                              
-                                ans = int(ans)
-                                print("")
-                                break
-                            except:
-                                ans = input("請重新輸入數字:")
-
-                        break
-            elif int(ans) - 1 < len(梅花) + len(菱形) + len(愛心) + len(黑桃) and len(
-                    黑桃) != 0 and ans!=0:
-                change = player[int(ans) - 1]
-                a = change.split("黑桃")
-                if a[1] == "A":
-                    a[1] = "1"
-                if a[1] == "J":
-                    a[1] = "11"
-                if a[1] == "Q":
-                    a[1] = "12"
-                if a[1] == "K":
-                    a[1] = "13"
-                while int(a[1]) != int(黑[-1]) + 1 or int(
-                        a[1]) != int(黑[0]) - 1:
-                    if int(a[1]) == int(黑[-1]) + 1:
-                        count += 1
-                        break
-                    if int(a[1]) == int(黑[0]) - 1:
-                        count += 1
-                        break
-                    if int(a[1]) != int(黑[-1]) + 1 or int(
-                            a[1]) != int(黑[0]) - 1:
-                        while True:
-                            try:
-                                int(ans)
-                                if ans == "":
-                                    raise
-                              
-                                ans = int(ans)
-                                break
-                            except:
-                                ans = input("請重新輸入數字:")
-
-                        break
+                ans = input("請重新輸入")
         rule(ans)
         if player[int(ans_1[-1]) - 1][0] == "梅":
             player.remove(player[int(ans_1[-1]) - 1])
@@ -610,42 +575,13 @@ while len(player) != 0 or len(p2) != 0 or len(p3) != 0 or len(p4) != 0:
     黑 = list(map(str, 黑))
     letter(黑)
     for i in range(0, len(梅)):
-        if 梅[i] == "J":
-            梅[i] = '11'
-        if 梅[i] == "Q":
-            梅[i] = '12'
-        if 梅[i] == "K":
-            梅[i] = '13'
-        if 梅[i] == "A":
-            梅[i] = '1'
+        num2(梅[i])
     for i in range(0, len(菱)):
-        if 菱[i] == "J":
-            菱[i] = '11'
-        if 菱[i] == "Q":
-            菱[i] = '12'
-        if 菱[i] == "K":
-            菱[i] = '13'
-        if 菱[i] == "A":
-            菱[i] = '1'
+        num2(菱[i])
     for i in range(0, len(愛)):
-        if 愛[i] == "J":
-            愛[i] = '11'
-        if 愛[i] == "Q":
-            愛[i] = '12'
-        if 愛[i] == "K":
-            愛[i] = '13'
-        if 愛[i] == "A":
-            愛[i] = '1'
+        num2(愛[i])
     for i in range(0, len(黑)):
-        if 黑[i] == "J":
-            黑[i] = '11'
-        if 黑[i] == "Q":
-            黑[i] = '12'
-        if 黑[i] == "K":
-            黑[i] = '13'
-        if 黑[i] == "A":
-            黑[i] = '1'
-
+        num2(黑[i])
     if len(p2) != 0:
         com(p2)
         goal = []
@@ -718,7 +654,6 @@ if b == tt:
 for i in range(0, 4):
     a = tt.count(tt[i])
 if b != tt:
-
         for i in range(0, 4):
             if total[0] == tt[i]:
                 print("第一名\t", winner[i], "共蓋了:", (tt[i]), "點\0蓋的牌:", to[i])
@@ -728,3 +663,6 @@ if b != tt:
                 print("第三名\t", winner[i], "共蓋了:", (tt[i]), "點\0蓋的牌:", to[i])
             elif total[3] == tt[i]:
                 print("第四名\t", winner[i], "共蓋了:", (tt[i]), "點\0蓋的牌:", to[i])
+
+                
+	
